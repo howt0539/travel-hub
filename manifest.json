@@ -1,0 +1,9 @@
+{
+  "name": "Travel Hub",
+  "short_name": "Travel Hub",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e0f2fe",
+  "theme_color": "#e0f2fe",
+  "icons": []
+}
