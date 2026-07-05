@@ -1,3 +1,5 @@
 .DS_Store
 .wrangler/
 .claude/
+.env
+.env.local
