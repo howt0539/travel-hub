@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大阪 Osaka · 2026</title>
+<meta name="theme-color" content="#554636">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Osaka 2026">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='28' fill='%23c8102e'/></svg>">
+<style>
+  :root {
+    --bg: #554636;
+    --line: rgba(245, 237, 224, 0.12);
+    --ink: #f5ede0;
+    --ink-mute: #c9b8a3;
+    --ink-soft: #9c8a76;
+    --accent: #c8102e;
+    --gold: #FFA631;
+    --amber: #CB7E1F;
+    --honey: #F2C94C;
+  }
+  html {
+    background-color: var(--bg);
+    overscroll-behavior-y: contain;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", "Songti TC", "PingFang TC", serif;
+    background-color: var(--bg);
+    min-height: 100vh;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 36px 24px 40px;
+    min-height: 100vh;
+  }
+
+  /* Top */
+  .top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+  .dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* Header */
+  .header { margin-bottom: 28px; }
+  .kanji {
+    font-size: 4.8rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .romaji {
+    font-family: "Helvetica Neue", -apple-system, sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    letter-spacing: 0.5em;
+    color: var(--ink-mute);
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--ink-mute);
+    margin: 18px 0;
+  }
+  .date-line {
+    font-family: "Helvetica Neue", -apple-system, sans-serif;
+    font-size: 0.92rem;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    font-weight: 300;
+  }
+  .meta-line {
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    margin-top: 5px;
+    letter-spacing: 0.15em;
+  }
+
+  /* Section (collapsible) */
+  .section { margin-top: 36px; }
+  details.section { padding-bottom: 2px; }
+  details > summary {
+    list-style: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::marker { content: ""; }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 11px;
+    position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-title .label {
+    font-size: 1rem;
+    letter-spacing: 0.38em;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .section-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 48px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--ink-mute);
+  }
+  .section-title .chev {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    transition: transform 0.25s ease;
+    width: 18px;
+    text-align: center;
+  }
+  details[open] > summary .section-title .chev { transform: rotate(180deg); }
+  .section-body {
+    background: rgba(245, 237, 224, 0.04);
+    border: 1px solid rgba(245, 237, 224, 0.08);
+    border-radius: 12px;
+    padding: 18px 16px;
+    animation: fadeIn 0.3s ease;
+  }
+  .section-body.bare {
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Flight */
+  .flight {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .flight:last-child { border-bottom: none; }
+  .flight:first-child { padding-top: 0; }
+  .flight-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .flight-tag {
+    font-size: 0.78rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-mute);
+    padding: 2px 9px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+  .flight-date {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.78rem;
+    color: var(--ink-mute);
+    letter-spacing: 0.18em;
+  }
+  .flight-no {
+    margin-left: auto;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+  }
+  .flight-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .port {
+    flex-shrink: 0;
+    width: 86px;
+    text-align: center;
+  }
+  .port .code {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 1.55rem;
+    font-weight: 200;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+  }
+  .port .time {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-top: 5px;
+    letter-spacing: 0.05em;
+  }
+  .port .meta {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+  }
+  .route { flex: 1; text-align: center; }
+  .route .dur {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.7rem;
+    color: var(--ink-mute);
+    letter-spacing: 0.2em;
+    margin-bottom: 4px;
+  }
+  .route .bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .route .bar span {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .route .bar .plane {
+    flex: 0;
+    height: auto;
+    background: none;
+    color: var(--ink-mute);
+    font-size: 0.78rem;
+  }
+
+  /* Day tabs */
+  .day-tabs {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .day-tab {
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 9px 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .day-tab:hover { border-color: var(--ink-mute); }
+  .day-tab.active {
+    border-color: var(--honey);
+    background: rgba(242, 201, 76, 0.08);
+  }
+  .day-tab .n {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+  .day-tab.active .n {
+    color: var(--honey);
+    font-weight: 500;
+  }
+  .day-tab .w {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    letter-spacing: 0.15em;
+    line-height: 1;
+  }
+  .day-tab.active .w { color: var(--ink-mute); }
+
+  /* Itinerary */
+  .day {
+    display: none;
+    padding: 6px 0 8px;
+    animation: dayIn 0.25s ease;
+  }
+  .day.active { display: block; }
+  @keyframes dayIn {
+    from { opacity: 0; transform: translateY(2px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .day-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .day-head .d {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.92rem;
+    color: var(--ink);
+    letter-spacing: 0.18em;
+    font-weight: 300;
+  }
+  .day-head .w {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.2em;
+  }
+  .day-route {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.85;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .day-route .spot {
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .day-route .spot.hl {
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+  .day-route .spot.sm {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    vertical-align: 1px;
+  }
+  .day-route .arr {
+    color: var(--gold);
+    margin: 0 6px;
+    font-family: "Helvetica Neue", sans-serif;
+  }
+
+  /* Spots */
+  .spots-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    margin: 4px 0 6px;
+  }
+  .day-spots { margin-bottom: 14px; }
+  .spot-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 2px;
+    border-bottom: 1px solid var(--line);
+  }
+  .spot-item:last-child { border-bottom: none; }
+  .spot-item .pin {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    color: var(--honey);
+  }
+  .spot-item .spot-name {
+    font-size: 0.98rem;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .spot-item .spot-link {
+    margin-left: auto;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.74rem;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    padding-bottom: 1px;
+    border-bottom: 1px dashed rgba(255, 166, 49, 0.4);
+  }
+  .spot-item .spot-link svg { width: 12px; height: 12px; }
+
+  .day-notes {
+    padding-left: 12px;
+    border-left: 1px solid var(--line);
+  }
+  .day-note {
+    display: flex;
+    gap: 10px;
+    padding: 4px 0;
+    font-size: 0.88rem;
+    color: var(--ink-mute);
+    line-height: 1.65;
+    letter-spacing: 0.04em;
+  }
+  .day-note .k-icon {
+    flex-shrink: 0;
+    width: 22px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 4px;
+  }
+  .day-note .icn {
+    width: 15px;
+    height: 15px;
+    color: var(--gold);
+  }
+  .day-note.tip .icn { color: var(--honey); }
+  .day-note .v { flex: 1; }
+  .day-note .v a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255, 166, 49, 0.4);
+  }
+  .ticket {
+    display: block;
+    margin-top: 8px;
+    padding: 9px 12px;
+    border: 1px dashed rgba(255, 166, 49, 0.45);
+    border-radius: 2px;
+    font-size: 0.84rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  a.ticket:hover {
+    background: rgba(255, 166, 49, 0.1);
+    border-color: var(--gold);
+  }
+  .ticket .tag {
+    display: inline-block;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 0.25em;
+    padding: 2px 6px;
+    margin-right: 8px;
+    background: rgba(255, 166, 49, 0.16);
+    color: var(--gold);
+    vertical-align: 1px;
+  }
+  .ticket .ext {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.78rem;
+    opacity: 0.7;
+    margin-left: 4px;
+  }
+
+  /* Rental info card */
+  .rental {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .rental-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .rental-title .icn { width: 14px; height: 14px; color: var(--gold); }
+  .rental-row {
+    display: flex;
+    gap: 10px;
+    padding: 3px 0;
+    font-size: 0.83rem;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+  }
+  .rental-row .rk {
+    flex-shrink: 0;
+    width: 56px;
+    color: var(--ink-soft);
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+  }
+  .rental-row .rv { flex: 1; color: var(--ink-mute); }
+  .rental-row .rv a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255, 166, 49, 0.4);
+  }
+  .rental .ticket { margin-top: 10px; }
+
+  /* Route options (二選一) */
+  .route-opts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .route-opt {
+    padding: 11px 13px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .ro-head {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 8px;
+  }
+  .ro-badge {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.78rem;
+    color: var(--gold);
+    background: rgba(203, 126, 31, 0.15);
+    border: 1px solid rgba(203, 126, 31, 0.45);
+  }
+  .ro-name {
+    font-size: 0.92rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+  .ro-steps { display: flex; flex-direction: column; }
+  .ro-step {
+    position: relative;
+    padding: 4px 0 4px 18px;
+    font-size: 0.88rem;
+    color: var(--ink-mute);
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+  }
+  .ro-step::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 12px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--honey);
+  }
+  .ro-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 17px;
+    width: 1px;
+    height: calc(100% - 9px);
+    background: var(--line);
+  }
+  .ro-step .ro-map {
+    margin-left: 7px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.72rem;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    border-bottom: 1px dashed rgba(255, 166, 49, 0.4);
+  }
+  .ro-step .ro-map svg { width: 11px; height: 11px; }
+  .ro-notes {
+    margin-top: 10px;
+    padding-top: 9px;
+    border-top: 1px solid var(--line);
+  }
+  .ro-note {
+    display: flex;
+    gap: 8px;
+    padding: 3px 0;
+    font-size: 0.82rem;
+    color: var(--ink-mute);
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+  }
+  .ro-note .icn {
+    flex-shrink: 0;
+    width: 13px;
+    height: 13px;
+    color: var(--gold);
+    margin-top: 4px;
+  }
+  .ro-note .v { flex: 1; }
+  .ro-notes .ticket { margin-top: 9px; }
+
+  /* Info section */
+  .sub-title {
+    margin-top: 22px;
+    margin-bottom: 4px;
+    padding-bottom: 6px;
+    font-size: 0.92rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    border-bottom: 1px solid var(--line);
+  }
+  .sub-title:first-child { margin-top: 2px; }
+  .sub-title .en {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.62rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    letter-spacing: 0.25em;
+    margin-left: 10px;
+  }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    line-height: 1.55;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .k {
+    color: var(--ink-mute);
+    font-size: 0.88rem;
+    flex-shrink: 0;
+    width: 92px;
+  }
+  .info-row .v {
+    color: var(--ink);
+    flex: 1;
+    text-align: right;
+  }
+  .info-row .v small {
+    display: block;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+  .info-row .v a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255, 166, 49, 0.4);
+  }
+  .info-row .v .amt {
+    font-family: "Helvetica Neue", sans-serif;
+    letter-spacing: 0.02em;
+  }
+  .info-row.total {
+    margin-top: 4px;
+    border-bottom: none;
+    border-top: 1px solid rgba(255, 166, 49, 0.4);
+  }
+  .info-row.total .k { color: var(--honey); font-size: 0.92rem; }
+  .info-row.total .v { color: var(--honey); font-size: 1.08rem; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG icon defs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="3" width="14" height="14" rx="2"/>
+      <line x1="5" y1="11" x2="19" y2="11"/>
+      <line x1="8" y1="7" x2="10" y2="7"/>
+      <line x1="14" y1="7" x2="16" y2="7"/>
+      <circle cx="9" cy="14" r="0.8" fill="currentColor"/>
+      <circle cx="15" cy="14" r="0.8" fill="currentColor"/>
+      <line x1="7" y1="20" x2="9" y2="17"/>
+      <line x1="17" y1="20" x2="15" y2="17"/>
+    </symbol>
+    <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 14l2-5h10l2 5v4H5z"/>
+      <line x1="5" y1="14" x2="19" y2="14"/>
+      <circle cx="8" cy="17.5" r="1.25"/>
+      <circle cx="16" cy="17.5" r="1.25"/>
+    </symbol>
+    <symbol id="i-walk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="13.5" cy="4.5" r="1.5"/>
+      <path d="M11 8l3 0 1.5 4 2.5 2M14 12l-2 4-3 4M12 12l-3 1M14.5 12l-1 4"/>
+    </symbol>
+    <symbol id="i-tip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 21h6M10 18h4"/>
+      <path d="M8 14a5 5 0 1 1 8 0c-1 1-1.5 2-1.5 4h-5c0-2-.5-3-1.5-4z"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z"/>
+      <circle cx="12" cy="10" r="2.4"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="container">
+  <div class="top">
+    <div class="dot" title="日本紅"></div>
+  </div>
+
+  <div class="header">
+    <div class="kanji">大阪</div>
+    <div class="romaji">O · S · A · K · A</div>
+    <div class="divider"></div>
+    <div class="date-line">2026 . 06 . 20 — 06 . 24</div>
+    <div class="meta-line">五 天 四 夜</div>
+  </div>
+
+  <details class="section" open>
+    <summary>
+      <div class="section-title">
+        <span class="label">航 班</span>
+        <span class="chev">▾</span>
+      </div>
+    </summary>
+    <div class="section-body">
+      <div class="flight">
+        <div class="flight-head">
+          <span class="flight-tag">去 程</span>
+          <span class="flight-date">06 / 20 SAT</span>
+          <span class="flight-no">IT 710</span>
+        </div>
+        <div class="flight-body">
+          <div class="port">
+            <div class="code">TPE</div>
+            <div class="time">07 : 45</div>
+            <div class="meta">桃園 T1</div>
+          </div>
+          <div class="route">
+            <div class="dur">3 H 45 M</div>
+            <div class="bar"><span></span><span class="plane">✈</span><span></span></div>
+          </div>
+          <div class="port">
+            <div class="code">KIX</div>
+            <div class="time">11 : 30</div>
+            <div class="meta">關西 T1</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flight">
+        <div class="flight-head">
+          <span class="flight-tag">回 程</span>
+          <span class="flight-date">06 / 24 WED</span>
+          <span class="flight-no">IT 211</span>
+        </div>
+        <div class="flight-body">
+          <div class="port">
+            <div class="code">KIX</div>
+            <div class="time">11 : 15</div>
+            <div class="meta">關西 T1</div>
+          </div>
+          <div class="route">
+            <div class="dur">2 H 55 M</div>
+            <div class="bar"><span></span><span class="plane">✈</span><span></span></div>
+          </div>
+          <div class="port">
+            <div class="code">TPE</div>
+            <div class="time">13 : 10</div>
+            <div class="meta">桃園 T1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="section" open>
+    <summary>
+      <div class="section-title">
+        <span class="label">行 程</span>
+        <span class="chev">▾</span>
+      </div>
+    </summary>
+    <div class="section-body bare">
+
+      <div class="day-tabs" role="tablist">
+        <button type="button" class="day-tab active" data-day="1" role="tab"><div class="n">1</div><div class="w">SAT</div></button>
+        <button type="button" class="day-tab" data-day="2" role="tab"><div class="n">2</div><div class="w">SUN</div></button>
+        <button type="button" class="day-tab" data-day="3" role="tab"><div class="n">3</div><div class="w">MON</div></button>
+        <button type="button" class="day-tab" data-day="4" role="tab"><div class="n">4</div><div class="w">TUE</div></button>
+        <button type="button" class="day-tab" data-day="5" role="tab"><div class="n">5</div><div class="w">WED</div></button>
+      </div>
+
+      <div class="day active" data-day="1">
+        <div class="day-head">
+          <span class="d">06 / 20</span>
+          <span class="w">星期六</span>
+        </div>
+        <div class="day-route">
+          <span class="spot">關西機場</span><span class="arr">→</span><span class="spot">難波車站</span><span class="arr">→</span><span class="spot">飯店 Check in</span>
+        </div>
+        <div class="spots-label">景 點</div>
+        <div class="day-spots">
+          <div class="spot-item"><svg class="pin"><use href="#i-pin"/></svg><span class="spot-name">難波八阪神社</span></div>
+          <div class="spot-item"><svg class="pin"><use href="#i-pin"/></svg><span class="spot-name">心齋橋</span></div>
+          <div class="spot-item"><svg class="pin"><use href="#i-pin"/></svg><span class="spot-name">道頓堀</span></div>
+        </div>
+        <div class="day-notes">
+          <div class="day-note"><span class="k-icon"><svg class="icn"><use href="#i-train"/></svg></span><span class="v">南海電鐵 特急 Rapi:t（關西機場站 → 難波站）</span></div>
+          <div class="day-note"><span class="k-icon"><svg class="icn"><use href="#i-walk"/></svg></span><span class="v">市區全程步行即可抵達各景點</span></div>
+          <div class="ticket"><span class="tag">去程</span>南海電鐵 ｜ KLOOK ＊3</div>
+        </div>
+      </div>
+
+      <div class="day" data-day="2">
+        <div class="day-head">
+          <span class="d">06 / 21</span>
+          <span class="w">星期日</span>
+        </div>
+        <div class="day-route">
+          <span class="spot">難波</span><span class="arr">→</span><span class="spot hl">勝尾寺</span><span class="arr">→</span><span class="spot hl">宇治</span><span class="arr">→</span><span class="spot sm">萬博</span><span class="arr">→</span><span class="spot">難波</span>
+        </div>
+        <div class="spots-label">景 點</div>
+        <div class="day-spots">
+          <div class="spot-item"><svg class="pin"><use href="#i-pin"/></svg><span class="spot-name">勝尾寺</span><a class="spot-link" href="https://maps.app.goo.gl/Vf8ziYnBXcKgYfMS7?g_st=ic" target="_blank" rel="noopener">停車場 <svg><use href="#i-car"/></svg></a></div>
+          <div class="spot-item"><svg class="pin"><use href="#i-pin"/></svg><span class="spot-name">宇治</span><a class="spot-link" href="https://maps.app.goo.gl/j5G2gzEG4yVTi3NEA?g_st=ic" target="_blank" rel="noopener">停車場 <svg><use href="#i-car"/></svg></a></div>
+          <div class="spot-item"><svg class="pin"><use href="#i-pin"/></svg><span class="spot-name">萬博 EXPOCITY</span><a class="spot-link" href="https://maps.app.goo.gl/n9iHJmb46vG8kXyM6" target="_blank" rel="noopener">地圖 <svg><use href="#i-pin"/></svg></a></div>
+        </div>
+        <div class="day-notes">
+          <div class="day-note"><span class="k-icon"><svg class="icn"><use href="#i-car"/></svg></span><span class="v">全程自駕。已預約 NIPPON 租車（含 ETC 卡與豪華全險）。</span></div>
+          <div class="rental">
+            <div class="rental-title"><svg class="icn"><use href="#i-car"/></svg>自駕資訊</div>
+            <div class="rental-row"><span class="rk">取車</span><span class="rv">06 / 21 (日) 08:00</span></div>
+            <div class="rental-row"><span class="rk">還車</span><span class="rv">06 / 21 (日) 20:00</span></div>
+            <div class="rental-row"><span class="rk">租車公司</span><span class="rv">NIPPON 租車公司</span></div>
+            <div class="rental-row"><span class="rk">車型</span><span class="rv">Standard（FIT / COROLLA 同級）・禁菸車</span></div>
+            <div class="rental-row"><span class="rk">取車店</span><span class="rv">南海難波站南出口營業所</span></div>
+            <div class="rental-row"><span class="rk">地址</span><span class="rv">大阪府大阪市浪速区難波中２丁目７番２号</span></div>
+            <div class="rental-row"><span class="rk">連絡處</span><span class="rv"><a href="tel:05017122509">050-1712-2509</a></span></div>
+            <a class="ticket" href="https://tc.tabirai.net/car/osaka/company/nippon/branch/?PID=708" target="_blank" rel="noopener"><span class="tag">店鋪</span>NIPPON 難波南出口營業所<span class="ext">↗ tabirai</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="day" data-day="3">
+        <div class="day-head">
+          <span class="d">06 / 22</span>
+          <span class="w">星期一</span>
+        </div>
+        <div class="day-route">
+          <span class="spot">難波</span><span class="arr">→</span><span class="spot">京都</span><span class="arr">→</span><span class="spot">難波</span>
+        </div>
+        <div class="spots-label">路 線</div>
+        <div class="route-opts">
+          <div class="route-opt">
+            <div class="ro-head"><span class="ro-name">京都</span></div>
+            <div class="ro-steps">
+              <div class="ro-step">伏見稻荷大社</div>
+              <div class="ro-step">搭京阪電車至「清水五條」或「祇園四條」吃午餐（或前往錦市場）</div>
+              <div class="ro-step">CHOYA 梅酒體驗店（三条）<a class="ro-map" href="https://maps.app.goo.gl/aWi3F4MYzGtfbPxX9?g_st=ic" target="_blank" rel="noopener">地圖 <svg><use href="#i-pin"/></svg></a></div>
+              <div class="ro-step">清水寺</div>
+              <div class="ro-step">八坂神社</div>
+              <div class="ro-step">花見小路</div>
+            </div>
+            <div class="ro-notes">
+              <div class="ro-note"><svg class="icn"><use href="#i-train"/></svg><span class="v">去程：難波站 → 御堂筋線 → 淀屋橋站，換乘京阪電車 → 伏見稻荷</span></div>
+              <div class="ro-note"><svg class="icn"><use href="#i-train"/></svg><span class="v">市區：京阪電車（伏見稻荷 → 清水五條／祇園四條）＋ 步行</span></div>
+              <div class="ro-note"><svg class="icn"><use href="#i-train"/></svg><span class="v">回程：祇園四條站 → 京阪特急 → 淀屋橋 → 御堂筋線回難波</span></div>
+              <div class="ticket"><span class="tag">TICKET</span>京阪電車「大阪・京都觀光一日券」</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="day" data-day="4">
+        <div class="day-head">
+          <span class="d">06 / 23</span>
+          <span class="w">星期二</span>
+        </div>
+        <div class="day-route">
+          <span class="spot">難波</span><span class="arr">→</span><span class="spot">梅田</span><span class="arr">→</span><span class="spot">難波</span>
+        </div>
+        <div class="spots-label">景 點</div>
+        <div class="day-spots">
+          <div class="spot-item"><svg class="pin"><use href="#i-pin"/></svg><span class="spot-name">中崎町</span></div>
+          <div class="spot-item"><svg class="pin"><use href="#i-pin"/></svg><span class="spot-name">梅田商圈</span></div>
+          <div class="spot-item"><svg class="pin"><use href="#i-pin"/></svg><span class="spot-name">HEP FIVE 摩天輪</span></div>
+        </div>
+        <div class="day-notes">
+          <div class="day-note"><span class="k-icon"><svg class="icn"><use href="#i-train"/></svg></span><span class="v">大阪地鐵 谷町線（南森町 / 東梅田 → 中崎町）</span></div>
+          <div class="day-note"><span class="k-icon"><svg class="icn"><use href="#i-walk"/></svg></span><span class="v">中崎町 → 梅田 步行 10–15 分鐘</span></div>
+          <div class="day-note"><span class="k-icon"><svg class="icn"><use href="#i-train"/></svg></span><span class="v">回程：大阪地鐵 御堂筋線 / 千日前線（梅田 → 日本橋）</span></div>
+          <div class="day-note tip"><span class="k-icon"><svg class="icn"><use href="#i-tip"/></svg></span><span class="v">HEP FIVE 摩天輪：大阪周遊卡免費入場</span></div>
+          <div class="ticket"><span class="tag">TICKET</span>大阪地鐵一日券 Enjoy Eco Card（搭三趟即回本）</div>
+        </div>
+      </div>
+
+      <div class="day" data-day="5">
+        <div class="day-head">
+          <span class="d">06 / 24</span>
+          <span class="w">星期三</span>
+        </div>
+        <div class="day-route">
+          <span class="spot">飯店 Check out</span><span class="arr">→</span><span class="spot">關西機場</span>
+        </div>
+        <div class="day-notes">
+          <div class="day-note"><span class="k-icon"><svg class="icn"><use href="#i-train"/></svg></span><span class="v">南海電鐵 特急 Rapi:t（難波站 → 關西機場站）</span></div>
+          <div class="ticket"><span class="tag">回程</span>南海電鐵 ｜ KKDAY ＊2 ｜ KLOOK ＊1</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <details class="section" open>
+    <summary>
+      <div class="section-title">
+        <span class="label">費 用</span>
+        <span class="chev">▾</span>
+      </div>
+    </summary>
+    <div class="section-body">
+
+      <div class="sub-title">個 人 <span class="en">PER PERSON</span></div>
+      <div class="info-row">
+        <span class="k">機　票</span>
+        <span class="v"><span class="amt">$13,386</span></span>
+      </div>
+      <div class="info-row">
+        <span class="k">住　宿</span>
+        <span class="v"><span class="amt">$3,948</span></span>
+      </div>
+      <div class="info-row">
+        <span class="k">交　通</span>
+        <span class="v"><span class="amt">$1,154</span><small>南海電鐵 $570 · 租車 $584</small></span>
+      </div>
+      <div class="info-row total">
+        <span class="k">合　計</span>
+        <span class="v"><span class="amt">$18,488</span></span>
+      </div>
+
+    </div>
+  </details>
+
+  <details class="section" open>
+    <summary>
+      <div class="section-title">
+        <span class="label">資 訊</span>
+        <span class="chev">▾</span>
+      </div>
+    </summary>
+    <div class="section-body">
+
+      <div class="sub-title">住 宿 <span class="en">STAY</span></div>
+      <div class="info-row">
+        <span class="k">飯　店</span>
+        <span class="v">Apartment Hotel 11 Nippombashi<small>4 晚 · 06 / 20 – 06 / 24</small></span>
+      </div>
+      <div class="info-row">
+        <span class="k">地　址</span>
+        <span class="v"><a href="https://www.google.com/maps/search/?api=1&query=Apartment+Hotel+11+Nippombashi%2C+1+Chome-11-16+Nipponbashi%2C+Chuo+Ward%2C+Osaka" target="_blank" rel="noopener">大阪市中央區日本橋 1-11-16 ↗</a><small>〒542-0073 · 近難波・日本橋站</small></span>
+      </div>
+
+      <div class="sub-title">入 境 須 知 <span class="en">ENTRY</span></div>
+      <div class="info-row">
+        <span class="k">簽　證</span>
+        <span class="v">免簽 90 天</span>
+      </div>
+      <div class="info-row">
+        <span class="k">入境申辦</span>
+        <span class="v"><a href="https://www.vjw.digital.go.jp/" target="_blank" rel="noopener">Visit Japan Web ↗</a><small>提前完成入境・海關 QR Code</small></span>
+      </div>
+      <div class="info-row">
+        <span class="k">海關申告</span>
+        <span class="v">線上完成 / 紙本備援</span>
+      </div>
+
+      <div class="sub-title">行 前 準 備 <span class="en">CHECKLIST</span></div>
+      <div class="info-row">
+        <span class="k">網　路</span>
+        <span class="v">eSIM 或 WiFi 蛋</span>
+      </div>
+      <div class="info-row">
+        <span class="k">外　幣</span>
+        <span class="v">日圓現金兌換<small>或開通海外刷卡</small></span>
+      </div>
+      <div class="info-row">
+        <span class="k">交通卡</span>
+        <span class="v">ICOCA / Suica<small>iPhone 錢包可直接加入</small></span>
+      </div>
+
+    </div>
+  </details>
+
+  <div class="footer">Ashley &nbsp;·&nbsp; Howt &nbsp;·&nbsp; Travel Hub</div>
+</div>
+
+<script>
+(() => {
+  const tabs = document.querySelectorAll('.day-tab');
+  const days = document.querySelectorAll('.day');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const d = tab.dataset.day;
+      tabs.forEach((t) => t.classList.toggle('active', t.dataset.day === d));
+      days.forEach((p) => p.classList.toggle('active', p.dataset.day === d));
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
